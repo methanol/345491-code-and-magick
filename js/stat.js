@@ -21,27 +21,31 @@
       }
     }
 
-    var barHeigth = 150; // px;
-    var step = barHeigth / (max - 0); // px;
+    var histogramHeigh = 150; // px;
+    var step = histogramHeigh / max; // px;
 
-    var histogramWidth = 40; // px;
+    var barWidth = 40; // px;
     var indent = 50;
     var initialX = 145;
     var initialY = 265;
+    var bottomYHist = 235;
+    var bottomYTime = 245;
 
     for (i = 0; i < times.length; i++) {
-      ctx.fillText(names[i], initialX + indent * i + histogramWidth * i, initialY);
-      ctx.fillText(Math.round(times[i]), initialX + indent * i + histogramWidth * i, 235 - times[i] * step);
+      var coordinateX = initialX + indent * i + barWidth * i;
+      ctx.fillText(names[i], coordinateX, initialY);
+      ctx.fillText(Math.round(times[i]), coordinateX, bottomYHist - times[i] * step);
     }
 
     for (i = 0; i < times.length; i++) {
+      coordinateX = initialX + indent * i + barWidth * i;
       if (names[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
         var randomBlue = Math.random();
         ctx.fillStyle = 'rgba(0, 0, 255,' + randomBlue + ')';
       }
-      ctx.fillRect(initialX + indent * i + histogramWidth * i, 245 - times[i] * step, histogramWidth, times[i] * step);
+      ctx.fillRect(coordinateX, bottomYTime - times[i] * step, barWidth, times[i] * step);
     }
   };
 })();
