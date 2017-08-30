@@ -58,7 +58,7 @@
   var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
 
   var onPopupEscPress = function (evt) {
-    if (evt.target.className === setupName) {
+    if (evt.target === setupName) {
       evt.stopPropogation();
       return;
     } else {
@@ -82,8 +82,13 @@
     openPopup();
 
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_CODE) {
-        closePopup();
+      if (evt.target === setupName) {
+        evt.stopPropogation();
+        return;
+      } else {
+        if (evt.keyCode === ESC_CODE) {
+          closePopup();
+        }
       }
     });
   });
