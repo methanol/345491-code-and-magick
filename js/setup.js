@@ -7,16 +7,16 @@
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
+  var COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+  var EYES = ['black', 'red', 'blue', 'yellow', 'green'];
+  var FIRE_BALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+  var ESC_CODE = 27;
+  var ENTER_CODE = 13;
+
   function createWizards() {
     var FIRST_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
     var SECOND_NAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-    var COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-    var EYES = ['black', 'red', 'blue', 'yellow', 'green'];
     var wizards = [];
-
-    function countNumber(n) {
-      return Math.floor(Math.random() * n);
-    }
 
     for (var i = 0; i < 4; i++) {
       wizards[i] =
@@ -56,11 +56,15 @@
   var wizardCoat = document.querySelector('.wizard-coat');
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
-  var FIRE_BALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === 27) {
-      closePopup();
+    if (evt.target.className === setupName) {
+      evt.stopPropogation();
+      return;
+    } else {
+      if (evt.keyCode === ESC_CODE) {
+        closePopup();
+      }
     }
   };
 
@@ -78,16 +82,16 @@
     openPopup();
 
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
-        setup.classList.add('hidden');
-      }
-    });
-
-    setupClose.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 13) {
+      if (evt.keyCode === ESC_CODE) {
         closePopup();
       }
     });
+  });
+
+  setupClose.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_CODE) {
+      closePopup();
+    }
   });
 
   setupClose.addEventListener('click', function () {
@@ -95,7 +99,7 @@
   });
 
   setupSave.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 13) {
+    if (evt.keyCode === ENTER_CODE) {
       closePopup();
     }
   });
@@ -105,7 +109,7 @@
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 13) {
+    if (evt.keyCode === ENTER_CODE) {
       openPopup();
     }
   });
@@ -129,12 +133,10 @@
   }
 
   wizardCoat.addEventListener('click', function () {
-    var COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
     wizardCoat.setAttribute('style', 'fill:' + COAT[countNumber(6)]);
   });
 
   wizardEyes.addEventListener('click', function () {
-    var EYES = ['black', 'red', 'blue', 'yellow', 'green'];
     wizardEyes.setAttribute('style', 'fill:' + EYES[countNumber(5)]);
   });
 
