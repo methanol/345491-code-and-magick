@@ -57,40 +57,29 @@
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
 
-  var onPopupEscPress = function (evt) {
+  function onPopupEscPress(evt) {
     if (evt.target === setupName) {
-      evt.stopPropogation();
+      evt.stopPropagation();
       return;
     } else {
       if (evt.keyCode === ESC_CODE) {
         closePopup();
       }
     }
-  };
+  }
 
-  var openPopup = function () {
+  function openPopup() {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
-  };
+  }
 
-  var closePopup = function () {
+  function closePopup() {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
-  };
+  }
 
   setupOpen.addEventListener('click', function () {
     openPopup();
-
-    document.addEventListener('keydown', function (evt) {
-      if (evt.target === setupName) {
-        evt.stopPropogation();
-        return;
-      } else {
-        if (evt.keyCode === ESC_CODE) {
-          closePopup();
-        }
-      }
-    });
   });
 
   setupClose.addEventListener('keydown', function (evt) {
