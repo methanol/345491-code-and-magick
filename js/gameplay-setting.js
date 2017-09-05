@@ -21,4 +21,4 @@
       return height / 3;
     }
   };
-})(window);
+})();
