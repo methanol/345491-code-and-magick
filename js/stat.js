@@ -5,15 +5,13 @@
     ctx.fillRect(110, 20, 420, 270);
     ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
     ctx.fillRect(100, 10, 420, 270);
-
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
-
     ctx.fillText('Ура вы победили!', 120, 40);
     ctx.fillText('Список результатов:', 120, 60);
   };
 
-  var getMaxTime = function (times) {
+  function getMaxTime(times) {
     var max = -1;
 
     for (var i = 0; i < times.length; i++) {
@@ -22,20 +20,19 @@
         max = time;
       }
     }
-
     return max;
-  };
+  }
 
-  var getBarColor = function (name) {
+  function getBarColor(name) {
     return (name === 'Вы') ?
       'rgba(255, 0, 0, 1)' :
       'rgba(0, 0, 255, ' + Math.random() + ')';
-  };
+  }
 
-  var drawHistogramBar = function (startX, startY, endX, endY, color, ctx) {
+  function drawHistogramBar(startX, startY, endX, endY, color, ctx) {
     ctx.fillStyle = color;
     ctx.fillRect(startX, startY, endX, endY);
-  };
+  }
 
   window.renderStatistics = function (ctx, names, times) {
     drawCloud(ctx);
