@@ -172,32 +172,11 @@
     <p class="setup-similar-label"></p>
   </div>
 </template>
-<script>
-  var fireballSize = 22;
-  var wizardSpeed = 3;
-  var wizardWidth = 70;
-
-  var getFireballSpeed = function(left) {
-    if (left) {
-      return 5;
-    }
-    return 2;
-  }
-
-  var getWizardHeight = function() {
-    return 1.337 * wizardWidth;
-  }
-
-  function getWizardX(width) {
-    return width * 0.5;
-  }
-
-  function getWizardY(height) {
-    return height / 3;
-  }
-</script>
-<script src="./js/setup.js"></script>
+<script src="./js/gameplay-setting.js"></script>
+<script src="./js/magnificent-functions.js"></script>
 <script src="./js/stat.js"></script>
+<script src="./js/wizards-creation.js"></script>
+<script src="./js/wizard-changed.js"></script>
 <script src="./js/game.js"></script>
 </body>
 </html>
