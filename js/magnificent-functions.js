@@ -1,17 +1,5 @@
 'use strict';
 (function () {
-  var setupName = document.querySelector('.setup-user-name');
-
-  function onPopupEscPress(evt) {
-    if (evt.target === setupName) {
-      evt.stopPropagation();
-      return;
-    } else {
-      if (evt.keyCode === window.magnificentFunctions.ESC_CODE) {
-        window.magnificentFunctions.closePopup();
-      }
-    }
-  }
 
   window.magnificentFunctions = {
     countNumber: function (n) {
@@ -23,11 +11,21 @@
     EYES: ['black', 'red', 'blue', 'yellow', 'green'],
     closePopup: function (item) {
       item.classList.add('hidden');
-      document.removeEventListener('keydown', onPopupEscPress);
+      document.removeEventListener('keydown');
     },
     openPopup: function (item) {
-      item.classList.add('hidden');
-      document.removeEventListener('keydown', onPopupEscPress);
+      item.classList.remove('hidden');
+      document.addEventListener('keydown');
+    },
+    onPopupEscPress: function (evt, item, useName) {
+      if (evt.target === useName) {
+        evt.stopPropagation();
+        return;
+      } else {
+        if (evt.keyCode === window.magnificentFunctions.ESC_CODE) {
+          window.magnificentFunctions.closePopup(item);
+        }
+      }
     }
   };
 })();
