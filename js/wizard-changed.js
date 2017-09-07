@@ -5,12 +5,8 @@
   var setupClose = setup.querySelector('.setup-close');
   var setupSave = document.querySelector('.setup-submit');
   var userNameInput = document.querySelector('.setup-user-name');
-  var wizardCoat = document.querySelector('.wizard-coat');
-  var wizardEyes = document.querySelector('.wizard-eyes');
-  var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
   var setupName = document.querySelector('.setup-user-name');
 
-  var FIRE_BALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var INITIAL_COORDS = {
     x: '50%',
     y: '100px'
@@ -70,7 +66,7 @@
     }
   });
 
-  wizardCoat.addEventListener('click', function () {
+  /* wizardCoat.addEventListener('click', function () {
     wizardCoat.setAttribute('style', 'fill:' + window.magnificentFunctions.COAT[window.magnificentFunctions.countNumber(6)]);
   });
 
@@ -79,7 +75,17 @@
   });
 
   wizardFireBalls.addEventListener('click', function () {
-    wizardFireBalls.setAttribute('style', 'background-color:' + FIRE_BALLS[window.magnificentFunctions.countNumber(5)]);
-  });
+    wizardFireBalls.setAttribute('style', 'background-color:' + window.magnificentFunctions.FIRE_BALLS[window.magnificentFunctions.countNumber(5)]);
+  });*/
 
+  window.wizardChanged = {
+    colorizeElement: function (wizardThing) {
+      wizardThing.addEventListener('click', function () {
+        if (typeof window.wizardChanged.callBack === 'function') {
+          window.wizardChanged.callBack();
+        }
+      });
+    },
+    callBack: null
+  };
 })();
