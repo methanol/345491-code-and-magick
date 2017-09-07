@@ -6,6 +6,9 @@
   var setupSave = document.querySelector('.setup-submit');
   var userNameInput = document.querySelector('.setup-user-name');
   var setupName = document.querySelector('.setup-user-name');
+  var wizardCoat = document.querySelector('.wizard-coat');
+  var wizardEyes = document.querySelector('.wizard-eyes');
+  var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
 
   var INITIAL_COORDS = {
     x: '50%',
@@ -79,13 +82,29 @@
   });*/
 
   window.wizardChanged = {
-    colorizeElement: function (wizardThing) {
-      wizardThing.addEventListener('click', function () {
-        if (typeof window.wizardChanged.callBack === 'function') {
-          window.wizardChanged.callBack();
+    colorizeElement1: function () {
+      wizardCoat.addEventListener('click', function () {
+        if (typeof window.wizardChanged.callBack1 === 'function') {
+          window.wizardChanged.callBack1();
         }
       });
     },
-    callBack: null
+    callBack1: null,
+    colorizeElement2: function () {
+      wizardEyes.addEventListener('click', function () {
+        if (typeof window.wizardChanged.callBack2 === 'function') {
+          window.wizardChanged.callBack2();
+        }
+      });
+    },
+    callBack2: null,
+    colorizeElement3: function () {
+      wizardFireBalls.addEventListener('click', function () {
+        if (typeof window.wizardChanged.callBack3 === 'function') {
+          window.wizardChanged.callBack3();
+        }
+      });
+    },
+    callBack3: null
   };
 })();
