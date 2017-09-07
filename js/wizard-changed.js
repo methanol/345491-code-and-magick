@@ -11,14 +11,22 @@
   var setupName = document.querySelector('.setup-user-name');
 
   var FIRE_BALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+  var INITIAL_COORDS = {
+    x: '50%',
+    y: '100px'
+  };
 
   setupOpen.addEventListener('click', function () {
     window.magnificentFunctions.openPopup(setup);
+    setup.style.top = INITIAL_COORDS.y;
+    setup.style.left = INITIAL_COORDS.x;
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.magnificentFunctions.ENTER_CODE) {
       window.magnificentFunctions.openPopup(setup);
+      setup.style.top = INITIAL_COORDS.y;
+      setup.style.left = INITIAL_COORDS.x;
     }
   });
 
