@@ -5,11 +5,12 @@
   var setupClose = setup.querySelector('.setup-close');
   var setupSave = document.querySelector('.setup-submit');
   var userNameInput = document.querySelector('.setup-user-name');
-  var setupName = document.querySelector('.setup-user-name');
   var wizardCoat = document.querySelector('.wizard-coat');
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
+  var setupName = document.querySelector('.setup-user-name');
 
+  var FIRE_BALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var INITIAL_COORDS = {
     x: '50%',
     y: '100px'
@@ -69,42 +70,20 @@
     }
   });
 
-  /* wizardCoat.addEventListener('click', function () {
-    wizardCoat.setAttribute('style', 'fill:' + window.magnificentFunctions.COAT[window.magnificentFunctions.countNumber(6)]);
-  });
+  function paintDress(arrOne) {
+    wizardCoat.setAttribute('style', 'fill:' + arrOne);
+  }
 
-  wizardEyes.addEventListener('click', function () {
-    wizardEyes.setAttribute('style', 'fill:' + window.magnificentFunctions.EYES[window.magnificentFunctions.countNumber(5)]);
-  });
+  function paintBalls(arrOne) {
+    wizardFireBalls.setAttribute('style', 'background-color:' + arrOne);
+  }
 
-  wizardFireBalls.addEventListener('click', function () {
-    wizardFireBalls.setAttribute('style', 'background-color:' + window.magnificentFunctions.FIRE_BALLS[window.magnificentFunctions.countNumber(5)]);
-  });*/
+  function paintBody(arrOne) {
+    wizardEyes.setAttribute('style', 'fill:' + arrOne);
+  }
 
-  window.wizardChanged = {
-    colorizeElement1: function () {
-      wizardCoat.addEventListener('click', function () {
-        if (typeof window.wizardChanged.callBack1 === 'function') {
-          window.wizardChanged.callBack1();
-        }
-      });
-    },
-    callBack1: null,
-    colorizeElement2: function () {
-      wizardEyes.addEventListener('click', function () {
-        if (typeof window.wizardChanged.callBack2 === 'function') {
-          window.wizardChanged.callBack2();
-        }
-      });
-    },
-    callBack2: null,
-    colorizeElement3: function () {
-      wizardFireBalls.addEventListener('click', function () {
-        if (typeof window.wizardChanged.callBack3 === 'function') {
-          window.wizardChanged.callBack3();
-        }
-      });
-    },
-    callBack3: null
-  };
+  window.colorizeElement(wizardCoat, window.magnificentFunctions.COAT, 6, paintDress);
+  window.colorizeElement(wizardFireBalls, FIRE_BALLS, 5, paintBalls);
+  window.colorizeElement(wizardEyes, window.magnificentFunctions.EYES, 5, paintBody);
+
 })();
