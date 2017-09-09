@@ -70,16 +70,20 @@
     }
   });
 
-  wizardCoat.addEventListener('click', function () {
-    wizardCoat.setAttribute('style', 'fill:' + window.magnificentFunctions.COAT[window.magnificentFunctions.countNumber(6)]);
-  });
+  function paintDress(arrOne) {
+    wizardCoat.setAttribute('style', 'fill:' + arrOne);
+  }
 
-  wizardEyes.addEventListener('click', function () {
-    wizardEyes.setAttribute('style', 'fill:' + window.magnificentFunctions.EYES[window.magnificentFunctions.countNumber(5)]);
-  });
+  function paintBalls(arrOne) {
+    wizardFireBalls.setAttribute('style', 'background-color:' + arrOne);
+  }
 
-  wizardFireBalls.addEventListener('click', function () {
-    wizardFireBalls.setAttribute('style', 'background-color:' + FIRE_BALLS[window.magnificentFunctions.countNumber(5)]);
-  });
+  function paintBody(arrOne) {
+    wizardEyes.setAttribute('style', 'fill:' + arrOne);
+  }
+
+  window.colorizeElement(wizardCoat, window.magnificentFunctions.COAT, 6, paintDress);
+  window.colorizeElement(wizardFireBalls, FIRE_BALLS, 5, paintBalls);
+  window.colorizeElement(wizardEyes, window.magnificentFunctions.EYES, 5, paintBody);
 
 })();
