@@ -72,6 +72,10 @@
 
   function paintDress(arrOne) {
     wizardCoat.setAttribute('style', 'fill:' + arrOne);
+    window.wizardChanged.coatColor = arrOne;
+    window.wizardsCreation.updateWizards();
+    console.log(arrOne);
+    console.log(window.wizardChanged.coatColor);
   }
 
   function paintBalls(arrOne) {
@@ -80,10 +84,16 @@
 
   function paintBody(arrOne) {
     wizardEyes.setAttribute('style', 'fill:' + arrOne);
+    window.wizardChanged.eyesColor = arrOne;
+    window.wizardsCreation.updateWizards();
   }
 
   window.colorizeElement(wizardCoat, window.magnificentFunctions.COAT, 6, paintDress);
   window.colorizeElement(wizardFireBalls, FIRE_BALLS, 5, paintBalls);
   window.colorizeElement(wizardEyes, window.magnificentFunctions.EYES, 5, paintBody);
 
+  window.wizardChanged = {
+    coatColor: 0,
+    eyesColor: 0
+  };
 })();
