@@ -9,6 +9,7 @@
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardFireBalls = document.querySelector('.setup-fireball-wrap');
   var setupName = document.querySelector('.setup-user-name');
+  var lastTimeout;
 
   var FIRE_BALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var INITIAL_COORDS = {
@@ -70,12 +71,19 @@
     }
   });
 
+  function getTimeout() {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
+      window.wizardsCreation.updateWizards();
+    }, 500);
+  }
+
   function paintDress(arrOne) {
     wizardCoat.setAttribute('style', 'fill:' + arrOne);
     window.wizardChanged.coatColor = arrOne;
-    window.wizardsCreation.updateWizards();
-    console.log(arrOne);
-    console.log(window.wizardChanged.coatColor);
+    getTimeout();
   }
 
   function paintBalls(arrOne) {
@@ -85,7 +93,7 @@
   function paintBody(arrOne) {
     wizardEyes.setAttribute('style', 'fill:' + arrOne);
     window.wizardChanged.eyesColor = arrOne;
-    window.wizardsCreation.updateWizards();
+    getTimeout();
   }
 
   window.colorizeElement(wizardCoat, window.magnificentFunctions.COAT, 6, paintDress);

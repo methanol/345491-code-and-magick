@@ -1,8 +1,6 @@
 'use strict';
 (function () {
   var userSetup = document.querySelector('.setup');
-  var wizardCoat = document.querySelector('.wizard-coat');
-  var wizardEyes = document.querySelector('.wizard-eyes');
   userSetup.classList.remove('hidden');
 
   var similarListElement = document.querySelector('.setup-similar-list');
@@ -18,7 +16,9 @@
 
   function addWizards(wiz) {
     var fragment = document.createDocumentFragment();
-
+    while (similarListElement.firstChild) {
+      similarListElement.removeChild(similarListElement.firstChild);
+    }
     for (var i = 0; i < 4; i++) {
       fragment.appendChild(renderWizard(wiz[i]));
     }
@@ -28,12 +28,12 @@
 
   var wizards = [];
 
-  var successHandler = function (data) {
+  function successHandler(data) {
     wizards = data;
     window.wizardsCreation.updateWizards();
-  };
+  }
 
-  var getRank = function (wizard) {
+  function getRank(wizard) {
     var rank = 0;
 
     if (wizard.colorCoat === window.wizardChanged.coatColor) {
@@ -43,9 +43,9 @@
       rank += 1;
     }
     return rank;
-  };
+  }
 
-  var namesComparator = function (left, right) {
+  function namesComparator(left, right) {
     if (left > right) {
       return 1;
     } else if (left < right) {
@@ -53,31 +53,7 @@
     } else {
       return 0;
     }
-  };
-
-  window.wizardsCreation = {
-    updateWizards: function () {
-      addWizards(wizards.sort(function (left, right) {
-        var rankDiff = getRank(right) - getRank(left);
-        if (rankDiff === 0) {
-          rankDiff = namesComparator(left.name, right.name);
-        }
-        return rankDiff;
-      }));
-    }
-  };
-
-  /*window.wizardChanged.onEyesChange = function (color) {
-    eyesColor = color;
-    console.log(eyesColor);
-    updateWizards();
-  };
-
-  window.wizardChanged.onCoatChange = function (color) {
-    coatColor = color;
-    console.log(coatColor);
-    updateWizards();
-  };*/
+  }
 
   function errorHandler(errorMessage) {
     var node = document.createElement('div');
@@ -100,5 +76,17 @@
     }, errorHandler);
     evt.preventDefault();
   });
+
+  window.wizardsCreation = {
+    updateWizards: function () {
+      addWizards(wizards.sort(function (left, right) {
+        var rankDiff = getRank(right) - getRank(left);
+        if (rankDiff === 0) {
+          rankDiff = namesComparator(left.name, right.name);
+        }
+        return rankDiff;
+      }));
+    }
+  };
 
 })();
