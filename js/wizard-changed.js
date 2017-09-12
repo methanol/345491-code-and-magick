@@ -71,7 +71,7 @@
     }
   });
 
-  function getTimeout() {
+  function debounce() {
     if (lastTimeout) {
       window.clearTimeout(lastTimeout);
     }
@@ -83,7 +83,7 @@
   function paintDress(arrOne) {
     wizardCoat.setAttribute('style', 'fill:' + arrOne);
     window.wizardChanged.coatColor = arrOne;
-    getTimeout();
+    debounce();
   }
 
   function paintBalls(arrOne) {
@@ -93,7 +93,7 @@
   function paintBody(arrOne) {
     wizardEyes.setAttribute('style', 'fill:' + arrOne);
     window.wizardChanged.eyesColor = arrOne;
-    getTimeout();
+    debounce();
   }
 
   window.colorizeElement(wizardCoat, window.magnificentFunctions.COAT, 6, paintDress);
