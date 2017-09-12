@@ -71,19 +71,19 @@
     }
   });
 
-  function debounce() {
+  function debounce(times, deeds) {
     if (lastTimeout) {
       window.clearTimeout(lastTimeout);
     }
     lastTimeout = window.setTimeout(function () {
-      window.wizardsCreation.updateWizards();
-    }, 500);
+      deeds();
+    }, times);
   }
 
   function paintDress(arrOne) {
     wizardCoat.setAttribute('style', 'fill:' + arrOne);
     window.wizardChanged.coatColor = arrOne;
-    debounce();
+    debounce(500, window.wizardsCreation.updateWizards);
   }
 
   function paintBalls(arrOne) {
@@ -93,7 +93,7 @@
   function paintBody(arrOne) {
     wizardEyes.setAttribute('style', 'fill:' + arrOne);
     window.wizardChanged.eyesColor = arrOne;
-    debounce();
+    debounce(500, window.wizardsCreation.updateWizards);
   }
 
   window.colorizeElement(wizardCoat, window.magnificentFunctions.COAT, 6, paintDress);
