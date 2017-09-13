@@ -16,12 +16,43 @@
 
   function addWizards(wiz) {
     var fragment = document.createDocumentFragment();
-
+    while (similarListElement.firstChild) {
+      similarListElement.removeChild(similarListElement.firstChild);
+    }
     for (var i = 0; i < 4; i++) {
       fragment.appendChild(renderWizard(wiz[i]));
     }
     similarListElement.appendChild(fragment);
     userSetup.querySelector('.setup-similar').classList.remove('hidden');
+  }
+
+  var wizards = [];
+
+  function successHandler(data) {
+    wizards = data;
+    updateWizards();
+  }
+
+  function getRank(wizard) {
+    var rank = 0;
+
+    if (wizard.colorCoat === window.wizardChanged.coatColor) {
+      rank += 2;
+    }
+    if (wizard.colorEyes === window.wizardChanged.eyesColor) {
+      rank += 1;
+    }
+    return rank;
+  }
+
+  function namesComparator(left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
   }
 
   function errorHandler(errorMessage) {
@@ -36,7 +67,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
   }
 
-  window.backend.load(addWizards, errorHandler);
+  window.backend.load(successHandler, errorHandler);
 
   var form = userSetup.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
@@ -45,5 +76,20 @@
     }, errorHandler);
     evt.preventDefault();
   });
+
+  function updateWizards() {
+    addWizards(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  }
+
+  window.wizardsCreation = {
+    updateWizards: updateWizards
+  };
+
 
 })();
