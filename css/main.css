@@ -864,7 +864,7 @@ input[type=radio]:checked + .review-mark-label {
   height:100%;
 
   left: 0;
-  top: 70px;
+  top: 0px;
 }
 
 .upload label {
